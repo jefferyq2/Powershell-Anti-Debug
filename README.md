@@ -19,3 +19,7 @@
 
 ## How to bypass
 - All can be spoofed lmfao.. i might update it when i feel like it.. :) but it gotta have some stars
+
+
+## To-do
+- List of blacklisted UUIDs, PC Names, IP's Etc.. (if i feel like it ill add it and it can be good..)
