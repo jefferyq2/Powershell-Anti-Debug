@@ -36,7 +36,7 @@ The script includes protection against the following anti-analysis programs:
 - `DbgX.Shell`
 - `ILSpy`
 
-**Note:** Attempting to kill Task Manager won't work until UAC Permissions (ADMIN). You can add UAC prompt functionality, and if the person chooses 'no,' prevent the script from running. Please don't use this script for malicious purposes. If you decide to use it, consider implementing a crypter like the one from Chainski on GitHub (AES ENCODER).
+**Note:** Attempting to kill Task Manager won't work until UAC Permissions (ADMIN). You can add UAC prompt functionality, and if the person chooses 'no,' prevent the script from running. Please don't use this script for malicious purposes. If you decide to use it, consider implementing a encoder like the one from Chainski on GitHub (AES ENCODER).
 
 ## To-do
 - List of blacklisted UUIDs, PC Names, IP's, etc. (if I feel like it, I'll add it and it can be good.. and block VT Machines lmfao)
