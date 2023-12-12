@@ -48,6 +48,7 @@ The script includes protection against the following anti-analysis programs:
 - That doesnt mean it will protect from debuggers and windbg thats why i made this :)) but dw this will be better in future.
 
 ## Cool Repos to Checkout : 
-- https://github.com/Chainski/AES-Encoder
-- https://github.com/ChildrenOfYahweh/Powershell-Token-Grabber
-- https://github.com/EvilBytecode/Batchfile-Token-Grabber-Evilbyte
+- Obfuscator for Powershell : https://github.com/Chainski/AES-Encoder
+- Stealer in Powershell : https://github.com/ChildrenOfYahweh/Powershell-Token-Grabber
+- Updated Batchfile Stealer (FUD FROM VT) : https://github.com/EvilBytecode/Batchfile-Token-Grabber-Evilbyte
+- UAC BYPASS = https://github.com/Chainski/ForceAdmin
