@@ -1,5 +1,6 @@
 # Simple-AntiDebug PowerShell Script
 
+
 ## Features:
 - **System Model Check**
 - **BIOS Version Check**
