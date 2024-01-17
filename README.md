@@ -1,7 +1,15 @@
 # Simple-AntiDebug PowerShell Script
 
+## Features Simple.ps1:
+- **Anti Analysis Program Protection = Shutdown**
+- **Title Window Name = Shutdown** (If detects Blacklisted title name)
+- **UUID Check = Shutdown** (If detects Blacklisted uuid)
+- **GPU Check = Shutdown** (If detects Blacklisted gpu)
+- **Computer Name Check = Shutdown** (If detects Blacklisted Computer Name)
+- **Username Check = Shutdown** (If detects Blacklisted Username)
 
-## Features:
+
+## Features Simple.ps1:
 - **System Model Check**
 - **BIOS Version Check**
 - **GPU Check**
